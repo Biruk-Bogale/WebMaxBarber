@@ -152,6 +152,7 @@ export default function BookingDetailsPage() {
               <Button
                 variant="gold"
                 className="w-full"
+                disabled={action.isPending}
                 onClick={() =>
                   action.mutate({
                     type: "confirm",
@@ -159,7 +160,9 @@ export default function BookingDetailsPage() {
                 }
               >
                 <Check className="h-4 w-4" />
-                Confirm Booking
+                {action.isPending && action.variables?.type === "confirm"
+                  ? "Confirming..."
+                  : "Confirm Booking"}
               </Button>
             )}
 
@@ -167,6 +170,7 @@ export default function BookingDetailsPage() {
               <Button
                 variant="default"
                 className="w-full"
+                disabled={action.isPending}
                 onClick={() =>
                   action.mutate({
                     type: "complete",
@@ -174,7 +178,9 @@ export default function BookingDetailsPage() {
                 }
               >
                 <CalendarDays className="h-4 w-4" />
-                Mark Completed
+                {action.isPending && action.variables?.type === "complete"
+                  ? "Completing..."
+                  : "Mark Completed"}
               </Button>
             )}
 
@@ -183,6 +189,7 @@ export default function BookingDetailsPage() {
                 <Button
                   variant="destructive"
                   className="w-full"
+                  disabled={action.isPending}
                   onClick={() =>
                     action.mutate({
                       type: "cancel",
@@ -190,7 +197,9 @@ export default function BookingDetailsPage() {
                   }
                 >
                   <X className="h-4 w-4" />
-                  Cancel Booking
+                  {action.isPending && action.variables?.type === "cancel"
+                    ? "Cancelling..."
+                    : "Cancel Booking"}
                 </Button>
               )}
           </div>
