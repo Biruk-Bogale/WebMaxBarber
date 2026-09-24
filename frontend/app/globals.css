@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@layer base {
+  :root {
+    --background: 40 25% 96%;
+    --foreground: 20 15% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 15% 10%;
+
+    --primary: 20 15% 10%;
+    --primary-foreground: 40 25% 96%;
+
+    --secondary: 40 18% 91%;
+    --secondary-foreground: 20 15% 10%;
+
+    --muted: 40 12% 91%;
+    --muted-foreground: 25 8% 42%;
+
+    --accent: 40 48% 57%;
+    --accent-foreground: 20 15% 10%;
+
+    --border: 30 10% 84%;
+    --input: 30 10% 84%;
+    --ring: 40 48% 57%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", Georgia, serif;
+  }
+
+  ::selection {
+    background: #c7a45d;
+    color: #111111;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  .gold-line {
+    @apply h-px w-16 bg-barber-gold;
+  }
+
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

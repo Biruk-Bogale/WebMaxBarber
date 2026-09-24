@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    /* Type-checking */
+    "strict": true /* Enable all strict type-checking options. */,
+    "noUncheckedIndexedAccess": true /* Add 'undefined' to index signature results. */,
+    "noFallthroughCasesInSwitch": true /* Ensure 'switch' statements have a 'break'. */,
+    "noImplicitReturns": true /* Ensure all code paths in a function return a value. */,
+    "noUnusedLocals": true /* Report errors on unused local variables. */,
+    "noUnusedParameters": true /* Report errors on unused parameters. */,
+
+    /* Modules */
+    "module": "NodeNext" /* Use Node.js ESM system (recommended for Node 16+). */,
+    "moduleResolution": "NodeNext" /* Match how Node.js resolves modules in ESM. */,
+    "resolveJsonModule": true /* Allow importing .json files. */,
+    "esModuleInterop": true /* Enable interoperability between CommonJS and ES modules. */,
+    "allowSyntheticDefaultImports": true /* Prevent import errors from mismatched defaults. */,
+    "forceConsistentCasingInFileNames": true /* Enforce consistent file naming. */,
+    "moduleDetection": "force" /* Ensure TypeScript correctly identifies module files. */,
+    "types": ["node"] /* Include Node.js type definitions. */,
+
+    /* Language and output */
+    "target": "ES2022" /* Target modern JavaScript (Node 18+ compatible). */,
+    "lib": ["ES2022"] /* Include ES2022 library definitions. */,
+    "isolatedModules": true /* Prevent module system issues during build. */,
+    "skipLibCheck": true /* Skip type checking of declaration files for faster builds. */,
+
+    /* Build output */
+    "rootDir": "./src" /* Root of your TypeScript source files. */,
+    "outDir": "./dist" /* Output folder for compiled JS files. */,
+    "sourceMap": true /* Generate .map files for debugging. */,
+    "declaration": true /* Generate .d.ts type declaration files. */,
+    "incremental": true /* Enable incremental compilation for faster rebuilds. */,
+    "removeComments": true /* Remove comments from compiled JS output. */
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "dist"]
+}

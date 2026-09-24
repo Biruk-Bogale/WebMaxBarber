@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(ADMIN)
+  isActive     Boolean  @default(true)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  refreshTokens RefreshToken[]
+
+  @@index([email])
+}
+
+model Customer {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  phone     String
+
+  bookings  Booking[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([email])
+  @@index([phone])
+}
+
+model Barber {
+  id         String    @id @default(cuid())
+  name       String
+  slug       String    @unique
+  bio        String?
+  image      String?
+  specialty  String?
+  isActive   Boolean   @default(true)
+
+  bookings   Booking[]
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([isActive])
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  price       Decimal   @db.Decimal(10, 2)
+  duration    Int
+  image       String?
+  isActive    Boolean   @default(true)
+
+  bookings    Booking[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([isActive])
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+
+  customerId  String
+  barberId    String
+  serviceId   String
+
+  bookingDate DateTime
+  startTime   DateTime
+  endTime     DateTime
+
+  status      BookingStatus @default(PENDING)
+  notes       String?
+
+  customer    Customer      @relation(fields: [customerId], references: [id])
+  barber      Barber        @relation(fields: [barberId], references: [id])
+  service     Service       @relation(fields: [serviceId], references: [id])
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([bookingDate])
+  @@index([barberId, bookingDate])
+  @@index([customerId])
+  @@index([status])
+}
+
+model ShopSettings {
+  id            String   @id @default(cuid())
+
+  name          String
+  description   String?
+  phone         String
+  email         String
+  address       String
+  city          String
+
+  latitude      Decimal? @db.Decimal(10, 7)
+  longitude     Decimal? @db.Decimal(10, 7)
+
+  openingHours  Json?
+
+  instagram     String?
+  facebook      String?
+  website       String?
+
+  updatedAt     DateTime @updatedAt
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
