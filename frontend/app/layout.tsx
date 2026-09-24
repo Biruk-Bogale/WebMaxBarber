@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { QueryProvider } from "@/lib/query-provider";
 import { AuthProvider } from "@/context/auth-context";
+import { RouteProgress } from "@/components/route-progress";
 
 export const metadata: Metadata = {
   title: {
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <RouteProgress />
         <QueryProvider>
           <AuthProvider>{children}</AuthProvider>
         </QueryProvider>
