@@ -4,6 +4,8 @@ export const metadata = {
   title: "Terms & Conditions",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function TermsPage() {
   return (
     <SiteShell>

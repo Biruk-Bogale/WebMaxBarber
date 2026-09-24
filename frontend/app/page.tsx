@@ -15,6 +15,8 @@ import { MotionReveal } from "@/components/site/motion-reveal";
 
 import { publicApi } from "@/lib/api.client";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const [services, barbers] = await Promise.all([
     publicApi.getServices().catch(() => []),
