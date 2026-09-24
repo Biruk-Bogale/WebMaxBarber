@@ -7,6 +7,8 @@ export const metadata = {
   title: "Book an Appointment",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function BookingPage() {
   const [services, barbers] = await Promise.all([
     publicApi.getServices().catch(() => []),

@@ -21,6 +21,8 @@ const defaultHours = {
   Sunday: "Closed",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ContactPage() {
   const shop = await publicApi.getShop().catch(() => null);
 

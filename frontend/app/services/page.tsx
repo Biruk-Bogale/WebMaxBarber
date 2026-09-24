@@ -13,6 +13,8 @@ export const metadata = {
   title: "Services & Pricing",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ServicesPage() {
   const services = await publicApi.getServices().catch(() => []);
 
