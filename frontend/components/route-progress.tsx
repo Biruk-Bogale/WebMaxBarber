@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import NProgress from "nprogress";
 
@@ -11,9 +11,18 @@ NProgress.configure({
 
 export function RouteProgress() {
   const pathname = usePathname();
+  const startedAt = useRef<number | null>(null);
 
   useEffect(() => {
-    NProgress.done();
+    const elapsed = startedAt.current ? Date.now() - startedAt.current : 0;
+    const delay = Math.max(0, 300 - elapsed);
+
+    const timeout = window.setTimeout(() => {
+      NProgress.done();
+      startedAt.current = null;
+    }, delay);
+
+    return () => window.clearTimeout(timeout);
   }, [pathname]);
 
   useEffect(() => {
@@ -50,6 +59,7 @@ export function RouteProgress() {
       }
 
       if (new URL(href).pathname !== window.location.pathname) {
+        startedAt.current = Date.now();
         NProgress.start();
       }
     }
