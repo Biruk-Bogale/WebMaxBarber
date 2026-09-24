@@ -36,7 +36,7 @@ export default function NewAdminUserPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -129,8 +129,8 @@ export default function NewAdminUserPage() {
           </p>
         )}
 
-        <Button type="submit" variant="gold">
-          Create Admin
+        <Button type="submit" variant="gold" disabled={isSubmitting}>
+          {isSubmitting ? "Creating..." : "Create Admin"}
         </Button>
       </form>
     </div>
