@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { CalendarDays, Menu, Scissors, X } from "lucide-react";
+import { CalendarDays, LogIn, Menu, Scissors, X } from "lucide-react";
 
 import { useState } from "react";
 
@@ -82,7 +82,14 @@ export function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:block">
+          <div className="hidden items-center gap-3 lg:flex">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/admin/login">
+                <LogIn className="h-4 w-4" />
+                Sign In
+              </Link>
+            </Button>
+
             <Button asChild variant="gold">
               <Link href="/booking">
                 <CalendarDays className="h-4 w-4" />
@@ -134,6 +141,13 @@ export function Header() {
                 <Link href="/booking" onClick={() => setMobileOpen(false)}>
                   <CalendarDays className="h-4 w-4" />
                   Book an Appointment
+                </Link>
+              </Button>
+
+              <Button asChild variant="outline" className="mt-2 w-full">
+                <Link href="/admin/login" onClick={() => setMobileOpen(false)}>
+                  <LogIn className="h-4 w-4" />
+                  Admin Login
                 </Link>
               </Button>
             </nav>
